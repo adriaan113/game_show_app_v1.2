@@ -14,8 +14,30 @@ const phrases=[
 ];
 
 
+function getRandomPhraseAsArray(arr){
+  const rand = arr[Math.floor(Math.random() * arr.length)];
+  let char= [];
+  char= rand.split('');
+
+  console.log(char);
+
+
+  // for(let i= 0;i<rand.length;i+=1){
+  //   char=rand.charAt(i);
+  // }
+  //
+  // //console.log(rand);
+  // console.log(char);
+
+}
+
+
+
+
 startGame.style.cursor ='pointer';
 
 startGame.addEventListener('click', ()=>{
   overlay.style.display= 'none';
 });
+
+getRandomPhraseAsArray(phrases);
