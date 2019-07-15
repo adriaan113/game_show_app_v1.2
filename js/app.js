@@ -2,6 +2,8 @@ const qwerty= document.querySelector('#qwerty');
 const phrase= document.querySelector('#phrase');
 let missed= 0;
 
+let char= [];
+
 const startGame= document.querySelector('.btn__reset');
 const overlay= document.querySelector('#overlay');
 
@@ -16,20 +18,33 @@ const phrases=[
 
 function getRandomPhraseAsArray(arr){
   const rand = arr[Math.floor(Math.random() * arr.length)];
-  let char= [];
+
   char= rand.split('');
-
-  console.log(char);
-
-
-  // for(let i= 0;i<rand.length;i+=1){
-  //   char=rand.charAt(i);
-  // }
-  //
-  // //console.log(rand);
-  // console.log(char);
-
+  return char;
 }
+
+
+function addPhraseToDisplay(arr){
+  for(let i=0;i<char.length;i++){
+    const li= document.createElement('li');
+    const attach= document.querySelector('#phrase > ul');
+    li.textContent=char[i];
+
+    if(li===''){
+      li.style.display= 'none';
+    }else{
+      li.className='letter';
+      attach.appendChild(li);
+    }
+
+
+
+  }
+
+
+  console.log(arr)
+}
+
 
 
 
@@ -40,4 +55,10 @@ startGame.addEventListener('click', ()=>{
   overlay.style.display= 'none';
 });
 
-getRandomPhraseAsArray(phrases);
+
+
+
+
+
+const test=getRandomPhraseAsArray(phrases);
+addPhraseToDisplay(test);
