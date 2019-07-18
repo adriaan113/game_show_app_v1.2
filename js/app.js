@@ -1,8 +1,8 @@
 const qwerty= document.querySelector('#qwerty');
 const phrase= document.querySelector('#phrase');
 
-let missed= 0;
-let hearts= document.querySelectorAll('img');
+let missed= -1;
+let hearts= document.querySelectorAll('img'); //specify .tries > img is better
 
 let char= [];
 
@@ -64,6 +64,21 @@ let match= null;
 
 
 
+
+function checkWin(e){
+
+  if(e===4){
+    console.log('satan');
+  }
+}
+
+
+
+
+
+
+
+
 qwerty.addEventListener('click',(e)=>{
   if(e.target && e.target.nodeName=='BUTTON'){
     e.target.className='chosen';
@@ -71,19 +86,19 @@ qwerty.addEventListener('click',(e)=>{
     let letterFound=checkLetter(e.target);
 
       if(letterFound===null){
+        missed++;
 
-        for(let i=0; i<hearts.length;i++){
+        // let parent=document.querySelector('ol');
+        // parent.children[missed].style.backgroundColor="red";
 
-          this.hearts[i].src='images/lostHeart.png';
+        for(let i=0;i<hearts.length;i++){
+          hearts[i].setAttribute('id', 'count '+ i);
         }
-
-
-        missed--;
-        }else{
-          missed++;
-    }
+        document.getElementById('count ' + missed).src='images/lostHeart.png';
+       }
   }
 
+  checkWin(missed);
 
 
 })
