@@ -1,3 +1,6 @@
+
+/////////////////VARIABLES////////////////
+
 const qwerty= document.querySelector('#qwerty');
 const phrase= document.querySelector('#phrase');
 
@@ -10,8 +13,11 @@ const startGame= document.querySelector('.btn__reset');
 const overlay= document.querySelector('#overlay');
 
 
+const show=document.getElementsByClassName('show');
+const letter= document.getElementsByClassName('letter');
 
 
+/////////////////FUNCTIONS////////////////
 
 
 function getRandomPhraseAsArray(arr){
@@ -22,19 +28,17 @@ function getRandomPhraseAsArray(arr){
 }
 
 
-
-
-
-
 function addPhraseToDisplay(arr){
   for(let i=0;i<char.length;i++){
     const li= document.createElement('li');
     const attach= document.querySelector('#phrase > ul');
 
       if(char[i]===" "){
-        li.style.display= 'none';//should add whitespace
+        li.style.display= 'inline-block';//should add whitespace
+        li.style.padding='10px';
       }else{
         li.className='letter';
+        li.style.margin='10px 2px';
       }
 
     li.textContent=char[i];
@@ -62,20 +66,31 @@ let match= null;
 
 
 
+function checkWin(){
 
-
-
-function checkWin(e){
-
-  if(e===4){
+  if(show.length===letter.length){
     console.log('satan');
+    overlay.style.display= 'flex';
+    overlay.className='win';
+    overlay.children[0].textContent='you won!';
+    startGame.textContent='play again';//should reset the whole game
+
+  }else if(missed===4){
+    overlay.style.display= 'flex';
+    overlay.className='lose';
+    overlay.children[0].textContent='you lose!';
+    startGame.textContent='play again';//should reset the whole game
+
   }
 }
 
+/////////////////EVENTS////////////////
 
+startGame.style.cursor ='pointer';
 
-
-
+startGame.addEventListener('click', ()=>{
+  overlay.style.display= 'none';
+});
 
 
 
@@ -98,25 +113,10 @@ qwerty.addEventListener('click',(e)=>{
        }
   }
 
-  checkWin(missed);
+  checkWin();
 
 
 })
 
-
-
-
-
-
-startGame.style.cursor ='pointer';
-
-startGame.addEventListener('click', ()=>{
-  overlay.style.display= 'none';
-});
-
-
-
-
-
-const test=getRandomPhraseAsArray(phrases);
-addPhraseToDisplay(test);
+const phraseArr=getRandomPhraseAsArray(phrases);
+addPhraseToDisplay(phraseArr);
