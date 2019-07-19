@@ -72,6 +72,36 @@ let match= null;
 
 
 
+function resetQwerty(){
+  const x= document.querySelectorAll('.chosen');
+  for(let i=0;i<x.length;i++){
+    x[i].classList.remove('chosen');
+  }
+}
+
+
+function reset(){
+
+  const newPhraseArr=getRandomPhraseAsArray(phrases);
+  addPhraseToDisplay(newPhraseArr);
+  overlay.style.display= 'none';
+
+  checkLetter('');
+
+  resetQwerty();
+
+  const y=document.querySelectorAll('.tries img');
+  for(let i=0;i<hearts.length;i++){
+  y[i].removeAttribute('id');
+  y[i].src='images/liveHeart.png';
+  }
+
+  missed=-1
+}
+
+
+
+
 function loseBtn(){
   winLoseBtn= document.createElement('a');
   winLoseBtn.className='btn__lose';
@@ -83,13 +113,8 @@ function loseBtn(){
 
   winLoseBtn.addEventListener('click',()=>{
 
-    const newPhraseArr=getRandomPhraseAsArray(phrases);
-    addPhraseToDisplay(newPhraseArr);
-    overlay.style.display= 'none';
+    reset();
 
-    checkLetter('');
-
-    missed=-1
   });
 
 }
@@ -154,8 +179,7 @@ qwerty.addEventListener('click',(e)=>{
       if(letterFound===null){
         missed++;
 
-        // let parent=document.querySelector('ol');
-        // parent.children[missed].style.backgroundColor="red";
+
 
         for(let i=0;i<hearts.length;i++){
           hearts[i].setAttribute('id', 'count '+ i);
