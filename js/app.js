@@ -61,16 +61,14 @@ let match= null;
       inputLetter[i].className+=' show';
      match= true;
     }
+    else if(btn===''){
+      inputLetter[i].classList.remove("show");
+      inputLetter[i].className+=' transition__reset';
+    }
   }
   return match;
 }
 
-
-// function test(){
-//   this.addEventListener('click',()=>{
-//      console.log('satan');
-//   });
-// }
 
 
 
@@ -84,7 +82,14 @@ function loseBtn(){
   winLoseBtn.style.cursor= 'pointer';
 
   winLoseBtn.addEventListener('click',()=>{
-    console.log('satan');
+
+    const newPhraseArr=getRandomPhraseAsArray(phrases);
+    addPhraseToDisplay(newPhraseArr);
+    overlay.style.display= 'none';
+
+    checkLetter('');
+
+    missed=-1
   });
 
 }
@@ -118,7 +123,7 @@ function checkWin(){
     overlay.className='lose';
     overlay.children[0].textContent='you lose!';
     startGame.style.display='none';
-    loseBtn();//win function is losebtn with some additional changes
+    loseBtn();
   }
 
 
