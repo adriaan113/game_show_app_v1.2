@@ -95,10 +95,18 @@ button {
 }
 */
 
-.btn-test{
+.btn__lose{
   padding: 8px;
   margin: 50px auto;
   background: red;
+  border-radius: 5px;
+  font-size: var(--font-size-medium);
+}
+
+.btn__win{
+  padding: 8px;
+  margin: 50px auto;
+  background: yellow;
   border-radius: 5px;
   font-size: var(--font-size-medium);
 }

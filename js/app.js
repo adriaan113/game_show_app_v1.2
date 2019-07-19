@@ -10,6 +10,7 @@ let hearts= document.querySelectorAll('.tries > img'); //specify .tries > img is
 let char= [];
 
 const startGame= document.querySelector('.btn__reset');
+let winLoseBtn;
 const overlay= document.querySelector('#overlay');
 
 
@@ -71,19 +72,33 @@ let match= null;
 //   });
 // }
 
-let btn;
+
 
 function loseBtn(){
-  btn= document.createElement('a');
-  btn.className='btn-test';
-  btn.textContent='test button';
-  //btn.setAttribute('onclick',test());
-  const attach= document.querySelector('#overlay');
-  attach.appendChild(btn);
-  btn.style.cursor= 'pointer';
+  winLoseBtn= document.createElement('a');
+  winLoseBtn.className='btn__lose';
+  winLoseBtn.textContent='lose button';
 
-  btn.addEventListener('click',()=>{
+  const attach= document.querySelector('#overlay');
+  attach.appendChild(winLoseBtn);
+  winLoseBtn.style.cursor= 'pointer';
+
+  winLoseBtn.addEventListener('click',()=>{
     console.log('satan');
+  });
+
+}
+
+function winBtn(){
+  winLoseBtn= document.createElement('a');
+  winLoseBtn.className='btn__win';
+  winLoseBtn.textContent='win button';
+  const attach= document.querySelector('#overlay');
+  attach.appendChild(winLoseBtn);
+  winLoseBtn.style.cursor= 'pointer';
+
+  winLoseBtn.addEventListener('click',()=>{
+    console.log('god');
   });
 
 }
@@ -95,14 +110,15 @@ function checkWin(){
     overlay.style.display= 'flex';
     overlay.className='win';
     overlay.children[0].textContent='you won!';
-    startGame.textContent='play again';//should reset the whole game
+    startGame.style.display='none';
+    winBtn();
 
   }else if(missed===4){
     overlay.style.display= 'flex';
     overlay.className='lose';
     overlay.children[0].textContent='you lose!';
-    startGame.style.display='none';//should reset the whole game
-    loseBtn();
+    startGame.style.display='none';
+    loseBtn();//win function is losebtn with some additional changes
   }
 
 
