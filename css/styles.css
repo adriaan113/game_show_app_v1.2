@@ -95,6 +95,14 @@ button {
 }
 */
 
+.btn-test{
+  padding: 8px;
+  margin: 50px auto;
+  background: red;
+  border-radius: 5px;
+  font-size: var(--font-size-medium);
+}
+
 .space {
   width: 15px;
 }

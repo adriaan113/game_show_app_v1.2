@@ -1,11 +1,11 @@
 
 /////////////////VARIABLES////////////////
 
-const qwerty= document.querySelector('#qwerty');
-const phrase= document.querySelector('#phrase');
+// const qwerty= document.querySelector('#qwerty');
+// const phrase= document.querySelector('#phrase');
 
 let missed= -1;
-let hearts= document.querySelectorAll('img'); //specify .tries > img is better
+let hearts= document.querySelectorAll('.tries > img'); //specify .tries > img is better
 
 let char= [];
 
@@ -65,11 +65,33 @@ let match= null;
 }
 
 
+// function test(){
+//   this.addEventListener('click',()=>{
+//      console.log('satan');
+//   });
+// }
+
+let btn;
+
+function loseBtn(){
+  btn= document.createElement('a');
+  btn.className='btn-test';
+  btn.textContent='test button';
+  //btn.setAttribute('onclick',test());
+  const attach= document.querySelector('#overlay');
+  attach.appendChild(btn);
+  btn.style.cursor= 'pointer';
+
+  btn.addEventListener('click',()=>{
+    console.log('satan');
+  });
+
+}
+
 
 function checkWin(){
 
   if(show.length===letter.length){
-    console.log('satan');
     overlay.style.display= 'flex';
     overlay.className='win';
     overlay.children[0].textContent='you won!';
@@ -79,12 +101,20 @@ function checkWin(){
     overlay.style.display= 'flex';
     overlay.className='lose';
     overlay.children[0].textContent='you lose!';
-    startGame.textContent='play again';//should reset the whole game
-
+    startGame.style.display='none';//should reset the whole game
+    loseBtn();
   }
+
+
 }
 
+
+
+
+
 /////////////////EVENTS////////////////
+
+
 
 startGame.style.cursor ='pointer';
 
@@ -117,6 +147,8 @@ qwerty.addEventListener('click',(e)=>{
 
 
 })
+
+
 
 const phraseArr=getRandomPhraseAsArray(phrases);
 addPhraseToDisplay(phraseArr);
