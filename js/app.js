@@ -128,7 +128,7 @@ function winBtn(){
   winLoseBtn.style.cursor= 'pointer';
 
   winLoseBtn.addEventListener('click',()=>{
-    console.log('god');
+    reset()
   });
 
 }
