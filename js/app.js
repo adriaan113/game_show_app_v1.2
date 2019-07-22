@@ -5,7 +5,7 @@
 // const phrase= document.querySelector('#phrase');
 
 let missed= -1;
-let hearts= document.querySelectorAll('.tries > img'); //specify .tries > img is better
+let hearts= document.querySelectorAll('.tries > img');
 
 let char= [];
 
@@ -62,8 +62,9 @@ let match= null;
      match= true;
     }
     else if(btn===''){
-      inputLetter[i].classList.remove("show");
-      inputLetter[i].className+=' transition__reset';
+
+     inputLetter[i].classList.remove("show");
+     //inputLetter[i].className+=' transition__reset';
     }
   }
   return match;
@@ -75,21 +76,26 @@ let match= null;
 function resetQwerty(){
   const x= document.querySelectorAll('.chosen');
   for(let i=0;i<x.length;i++){
-    x[i].classList.remove('chosen');
+    //x[i].classList.remove('chosen');
+    x[i].className= '';
+    x[i].removeAttribute('disabled');
   }
 }
 
 
-function reset(){
+
+function resetPhrase() {
+
+  const x = document.querySelector('#phrase > ul');
+  x.innerHTML = '';
 
   const newPhraseArr=getRandomPhraseAsArray(phrases);
   addPhraseToDisplay(newPhraseArr);
   overlay.style.display= 'none';
 
-  checkLetter('');
+}
 
-  resetQwerty();
-
+function resetHearts(){
   const y=document.querySelectorAll('.tries img');
   for(let i=0;i<hearts.length;i++){
   y[i].removeAttribute('id');
@@ -97,40 +103,44 @@ function reset(){
   }
 
   missed=-1
+
 }
 
 
 
+function reset(){
+
+  resetPhrase()
+
+  checkLetter('');
+
+  resetQwerty();
+
+  resetHearts();
+
+}
+
+
 
 function loseBtn(){
-  winLoseBtn= document.createElement('a');
-  winLoseBtn.className='btn__lose';
-  winLoseBtn.textContent='lose button';
 
-  const attach= document.querySelector('#overlay');
-  attach.appendChild(winLoseBtn);
-  winLoseBtn.style.cursor= 'pointer';
+  startGame.textContent='play again';
+  startGame.className='btn__winlose';
 
-  winLoseBtn.addEventListener('click',()=>{
-
+  startGame.addEventListener('click',()=>{
     reset();
-
   });
 
 }
 
 function winBtn(){
-  winLoseBtn= document.createElement('a');
-  winLoseBtn.className='btn__win';
-  winLoseBtn.textContent='win button';
-  const attach= document.querySelector('#overlay');
-  attach.appendChild(winLoseBtn);
-  winLoseBtn.style.cursor= 'pointer';
 
-  winLoseBtn.addEventListener('click',()=>{
-    reset()
+  startGame.textContent='play again';
+  startGame.className='btn__winlose';
+
+  startGame.addEventListener('click',()=>{
+    reset();
   });
-
 }
 
 
@@ -140,17 +150,17 @@ function checkWin(){
     overlay.style.display= 'flex';
     overlay.className='win';
     overlay.children[0].textContent='you won!';
-    startGame.style.display='none';
+    //startGame.style.display='none';
     winBtn();
 
   }else if(missed===4){
     overlay.style.display= 'flex';
     overlay.className='lose';
     overlay.children[0].textContent='you lose!';
-    startGame.style.display='none';
+    //startGame.style.display='none';
     loseBtn();
-  }
 
+  }
 
 }
 
@@ -189,7 +199,6 @@ qwerty.addEventListener('click',(e)=>{
   }
 
   checkWin();
-
 
 })
 
